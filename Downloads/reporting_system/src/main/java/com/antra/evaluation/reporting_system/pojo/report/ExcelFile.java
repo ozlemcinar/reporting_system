@@ -15,14 +15,20 @@ public class ExcelFile {
         System.out.println(fileId);
         this.FileId=fileId;
     }
+
+    /**
+     *
+     * @return String
+     *
+     * To generate a Unique File Name - Helper function.
+     */
     String generateUniqueFileName() {
         String filename = "";
-        long millis = System.currentTimeMillis();
         String datetime = new Date().toString();
         datetime = datetime.replace(" ", "");
         datetime = datetime.replace(":", "");
-        String rndchars = RandomStringUtils.randomAlphanumeric(16);
-        filename = rndchars + "" + datetime + "" + millis;
+        String rndchars = RandomStringUtils.randomAlphanumeric(5);
+        filename = rndchars + "" + datetime ;
         return filename;
     }
 
