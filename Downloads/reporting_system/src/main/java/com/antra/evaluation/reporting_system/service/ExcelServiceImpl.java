@@ -29,7 +29,7 @@ public class ExcelServiceImpl implements ExcelService {
     public InputStream getExcelBodyById(String id) {
 
         Optional<ExcelFile> fileInfo = excelRepository.getFileById(id);
-            File file = new File("temp.xlsx");
+            File file = new File(id+".xlsx");
             try {
                 return new FileInputStream(file);
             } catch (FileNotFoundException e) {
