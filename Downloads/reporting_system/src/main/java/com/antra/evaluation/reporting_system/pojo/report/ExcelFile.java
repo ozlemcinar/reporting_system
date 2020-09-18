@@ -48,4 +48,10 @@ public class ExcelFile {
     public void setExcelData(ExcelData excelData) {
         this.excelData = excelData;
     }
+
+
+    @Override
+    public String toString(){
+        return "Submitter " + submitter +"fileID " + FileId + "excelData "+excelData.getFileId();
+    }
 }

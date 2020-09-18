@@ -28,4 +28,8 @@ public class ExcelDataHeader {
     public void setWidth(int width) {
         this.width = width;
     }
+    @Override
+    public String toString(){
+        return "name " + name +"type " + type.name() + "width "+width;
+    }
 }

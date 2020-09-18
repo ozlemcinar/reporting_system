@@ -33,6 +33,15 @@ public class ExcelGenerationController {
         this.excelService = excelService;
     }
 
+    /**
+     *
+     * @param request
+     * @return ResponseEntity<ExcelResponse>
+     * @throws IOException
+     *
+     * This function is used to Generate Excel which has a sheet.
+     */
+
     @PostMapping("/excel")
     @ApiOperation("Generate Excel")
     public ResponseEntity<ExcelResponse> createExcel(@RequestBody @Validated ExcelRequest request) throws IOException {
@@ -47,6 +56,16 @@ public class ExcelGenerationController {
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    /**
+     *
+     * @param request
+     * @return ResponseEntity<ExcelResponse>
+     * @throws IOException
+     *
+     * This function is used to Generate Excel which has multi sheets
+     */
+
     @PostMapping("/excel/auto")
     @ApiOperation("Generate Multi-Sheet Excel Using Split field")
     public ResponseEntity<ExcelResponse> createMultiSheetExcel(@RequestBody @Validated MultiSheetExcelRequest request) throws IOException {
@@ -61,6 +80,14 @@ public class ExcelGenerationController {
             return null;
         }
     }
+
+    /**
+     *
+     * @return ResponseEntity<List<ExcelResponse>>
+     *
+     * This function is used to list saved Excel files.
+     */
+
     @GetMapping("/excel")
     @ApiOperation("List all existing files")
     public ResponseEntity<List<ExcelResponse>> listExcels() {
@@ -68,6 +95,15 @@ public class ExcelGenerationController {
         response=  excelService.listHelper();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    /**
+     *
+     * @param id
+     * @param response
+     * @throws IOException
+     *
+     * This function is used to download Excel file.
+     */
     @GetMapping("/excel/{id}/content")
     public void downloadExcel(@PathVariable String id, HttpServletResponse response) throws IOException {
         InputStream fis = excelService.getExcelBodyById(id);
@@ -75,6 +111,15 @@ public class ExcelGenerationController {
         response.setHeader("Content-Disposition","attachment; filename=\"name_of_excel_file.xls\""); // TODO: File name cannot be hardcoded here
         FileCopyUtils.copy(fis, response.getOutputStream());
     }
+
+    /**
+     *
+     * @param id
+     * @return ResponseEntity<ExcelResponse>
+     *
+     * This function is used to delete desired Excel File.
+     */
+
     @DeleteMapping("/excel/{id}")
     public ResponseEntity<ExcelResponse> deleteExcel(@PathVariable String id) {
         var response = new ExcelResponse();

@@ -40,4 +40,11 @@ public class ExcelData {
     public void setSheets(List<ExcelDataSheet> sheets) {
         this.sheets = sheets;
     }
+
+    @Override
+    public String toString(){
+        return "title " + title +"generatedTime " + generatedTime + "sheets "+sheets.size() + "fileId "+fileId;
+    }
+
+
 }

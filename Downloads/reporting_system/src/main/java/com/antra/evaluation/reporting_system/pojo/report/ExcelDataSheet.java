@@ -32,4 +32,9 @@ public class ExcelDataSheet {
     public void setDataRows(List<List<Object>> dataRows) {
         this.dataRows = dataRows;
     }
+
+    @Override
+    public String toString(){
+        return "Title " + title +"headers " + headers.size() + "dataRows "+dataRows.size();
+    }
 }
