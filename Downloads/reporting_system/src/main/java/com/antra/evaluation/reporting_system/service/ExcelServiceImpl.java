@@ -25,7 +25,17 @@ public class ExcelServiceImpl implements ExcelService {
     @Autowired
     ExcelRepository excelRepository;
     private static final Logger log = LoggerFactory.getLogger(ExcelServiceImpl.class);
+
+    public ExcelRepository getExcelRepository() {
+        return excelRepository;
+    }
+
+    public void setExcelRepository(ExcelRepository excelRepository) {
+        this.excelRepository = excelRepository;
+    }
+
     @Override
+
     public InputStream getExcelBodyById(String id) {
 
         Optional<ExcelFile> fileInfo = excelRepository.getFileById(id);
@@ -95,6 +105,7 @@ public class ExcelServiceImpl implements ExcelService {
      * Helper function to create an Excel file which has 1 sheet.
      */
     public ExcelFile createHelper(ExcelRequest request) throws IOException {
+        ExcelFile excelFile=new ExcelFile();
         ExcelData excelData = new ExcelData();
         ExcelDataSheet sheet = new ExcelDataSheet();
         List<ExcelDataSheet> sheets = new ArrayList<ExcelDataSheet>();
@@ -102,7 +113,7 @@ public class ExcelServiceImpl implements ExcelService {
         List<List<Object>> dataRows = request.getData();
         if(request.getHeaders()==null){
             log.error("validation error: headers can't be empty.");
-            return null;
+            return excelFile;
         }
         for (int i = 0; i < request.getData().size(); i ++) {
             if(request.getData().get(i).size()!=request.getHeaders().size()) {
@@ -121,7 +132,7 @@ public class ExcelServiceImpl implements ExcelService {
         sheets.add(sheet);
         excelData.setSheets(sheets);
         excelData.setTitle(request.getDescription());
-        ExcelFile excelFile=new ExcelFile();
+
         excelData.setFileId(excelFile.getFileId());
         excelFile.setSubmitter(request.getSubmitter());
         excelFile.setExcelData(excelData);

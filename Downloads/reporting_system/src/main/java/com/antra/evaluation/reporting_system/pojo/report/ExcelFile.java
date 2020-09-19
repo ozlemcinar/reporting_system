@@ -22,7 +22,7 @@ public class ExcelFile {
      *
      * To generate a Unique File Name - Helper function.
      */
-    String generateUniqueFileName() {
+    public String generateUniqueFileName() {
         String filename = "";
         String datetime = new Date().toString();
         datetime = datetime.replace(" ", "");

@@ -50,11 +50,11 @@ public class ExcelGenerationController {
         try{
             response.setFileId(file.getFileId());
             response.setSubmitter(file.getSubmitter());
-            return new ResponseEntity<>(response, HttpStatus.OK);
+
         }catch (Exception IOException){
             log.error("File couldn't be created!");
-            return null;
         }
+        return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
 
