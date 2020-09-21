@@ -46,16 +46,15 @@ public class ExcelGenerationController {
     @ApiOperation("Generate Excel")
     public ResponseEntity<ExcelResponse> createExcel(@RequestBody @Validated ExcelRequest request) throws IOException {
         ExcelResponse response = new ExcelResponse();
-        ExcelFile file= excelService.createHelper(request);
+        ExcelFile file= excelService.create(request);
         try{
             response.setFileId(file.getFileId());
             response.setSubmitter(file.getSubmitter());
-
         }catch (Exception IOException){
+            /* if the create function couldn't work because of wrong input, it will throw the exception*/
             log.error("File couldn't be created!");
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
-
     }
 
     /**
@@ -71,12 +70,13 @@ public class ExcelGenerationController {
     @ApiOperation("Generate Multi-Sheet Excel Using Split field")
     public ResponseEntity<ExcelResponse> createMultiSheetExcel(@RequestBody @Validated MultiSheetExcelRequest request) throws IOException {
         ExcelResponse response = new ExcelResponse();
-        ExcelFile excelFile=excelService.createMultiSheetHelper(request);
+        ExcelFile excelFile=excelService.createMultiSheet(request);
         try {
             response.setFileId(excelFile.getFileId());
             response.setSubmitter(excelFile.getSubmitter());
             return new ResponseEntity<>(response, HttpStatus.OK);
         }catch(Exception IOExceotion){
+            /* if the create function couldn't work because of wrong input, it will throw the exception*/
             log.error("File couldn't be created!");
             return null;
         }
@@ -93,7 +93,7 @@ public class ExcelGenerationController {
     @ApiOperation("List all existing files")
     public ResponseEntity<List<ExcelResponse>> listExcels() {
         var response = new ArrayList<ExcelResponse>();
-        response=  excelService.listHelper();
+        response=  excelService.list();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -125,11 +125,13 @@ public class ExcelGenerationController {
     public ResponseEntity<ExcelResponse> deleteExcel(@PathVariable String id) {
         var response = new ExcelResponse();
         try {
-            ExcelFile excelFile = excelService.deleteHelper(id);
+            ExcelFile excelFile = excelService.deleteFile(id);
             response.setFileId(excelFile.getFileId());
             response.setSubmitter(excelFile.getSubmitter());
             return new ResponseEntity<>(response, HttpStatus.OK);
         }catch(Exception IOException){
+            /* if the delete function couldn't work because of wrong input, it will throw the exception*/
+            log.error("File couldn't be deleted!");
             return null;
         }
     }

@@ -110,7 +110,7 @@ class ReportingSystemApplicationTests {
     public void testCreateExcel(){
         ExcelFile excelFile = null;
         try{
-            excelFile=excelService.createHelper(excelRequest);
+            excelFile=excelService.create(excelRequest);
 
         }catch (Exception e){
             e.printStackTrace();
@@ -122,7 +122,7 @@ class ReportingSystemApplicationTests {
     public void testCreateMultiExcel(){
         ExcelFile excelFile = null;
         try{
-            excelFile = excelService.createMultiSheetHelper(multiSheetExcelRequest);
+            excelFile = excelService.createMultiSheet(multiSheetExcelRequest);
         }
         catch (Exception e){
             e.printStackTrace();
@@ -135,8 +135,8 @@ class ReportingSystemApplicationTests {
         ArrayList<ExcelResponse> listOfList = new ArrayList<ExcelResponse>();
         ExcelFile excelFile = new ExcelFile();
         try{
-            excelFile=excelService.createHelper(excelRequest);
-            listOfList = excelService.listHelper();
+            excelFile=excelService.create(excelRequest);
+            listOfList = excelService.list();
         }
         catch (Exception e){
             e.printStackTrace();
@@ -149,9 +149,9 @@ class ReportingSystemApplicationTests {
     public void testDeleteExcel() throws IOException {
         ExcelFile excelFile = new ExcelFile();
         try{
-            excelFile = excelService.createHelper(excelRequest);
+            excelFile = excelService.create(excelRequest);
             String id = excelFile.getFileId();
-            excelService.deleteHelper(id);
+            excelService.deleteFile(id);
         }catch (Exception e){
             e.printStackTrace();
         }

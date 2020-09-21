@@ -46,7 +46,7 @@ public class APITest {
 
     @Test
     public void testFileDelete() throws  IOException{
-        Mockito.when(excelService.deleteHelper("temp")).thenReturn(excelFile);
+        Mockito.when(excelService.deleteFile("temp")).thenReturn(excelFile);
         given().delete("/excel/temp")
                 .peek()
                 .then().assertThat()
@@ -67,7 +67,7 @@ public class APITest {
     @Test
     public void testListFiles() throws FileNotFoundException {
         ArrayList <ExcelResponse> excelResponses=new ArrayList<ExcelResponse>();
-        Mockito.when(excelService.listHelper()).thenReturn(excelResponses);
+        Mockito.when(excelService.list()).thenReturn(excelResponses);
         given().accept("application/json").get("/excel").peek().
                 then().assertThat()
                 .statusCode(200);
@@ -75,7 +75,7 @@ public class APITest {
 
     @Test
     public void testExcelGeneration() throws IOException {
-        Mockito.when(excelService.createHelper(any())).thenReturn(new ExcelFile());
+        Mockito.when(excelService.create(any())).thenReturn(new ExcelFile());
         given().accept("application/json").contentType(ContentType.JSON).body("{\"headers\":[\"Name\",\"Age\"], \"data\":[[\"Teresa\",\"5\"],[\"Daniel\",\"1\"]],\"submitter\":\"Dawei\", \"description\":\"Description\"  }").post("/excel").peek().
                 then().assertThat()
                 .statusCode(200);
@@ -83,7 +83,7 @@ public class APITest {
 
     @Test
     public void testMultiExcelGeneration() throws IOException {
-        Mockito.when(excelService.createMultiSheetHelper(any())).thenReturn(new ExcelFile());
+        Mockito.when(excelService.createMultiSheet(any())).thenReturn(new ExcelFile());
         given().accept("application/json").contentType(ContentType.JSON).body("{\"headers\":[\"Name\",\"Age\"], \"data\":[[\"Teresa\",\"5\"],[\"Daniel\",\"1\"]], \"submitter\":\"Dawei\", \"description\":\"Description\" , \"splitBy\":\"class\"}").post("/excel").peek().
                 then().assertThat()
                 .statusCode(200);

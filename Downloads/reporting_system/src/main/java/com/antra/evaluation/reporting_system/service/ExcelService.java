@@ -11,9 +11,9 @@ import java.util.ArrayList;
 
 public interface ExcelService {
     InputStream getExcelBodyById(String id);
-    ExcelFile createHelper(ExcelRequest excelRequest) throws IOException;
-    ArrayList<ExcelResponse> listHelper();
-    ExcelFile deleteHelper(String id);
-    ExcelFile createMultiSheetHelper(MultiSheetExcelRequest request) throws IOException;
+    ExcelFile create(ExcelRequest excelRequest) throws IOException;
+    ArrayList<ExcelResponse> list();
+    ExcelFile deleteFile(String id);
+    ExcelFile createMultiSheet(MultiSheetExcelRequest request) throws IOException;
 
 }

@@ -55,7 +55,7 @@ public class ExcelServiceImpl implements ExcelService {
      *
      * Helper function to delete Excel file
      */
-    public ExcelFile deleteHelper(String id){
+    public ExcelFile deleteFile(String id){
         if(id==null){
             log.error("validation error: You need to enter valid file name");
         }
@@ -79,7 +79,7 @@ public class ExcelServiceImpl implements ExcelService {
      *
      * Helper function to list Excel files.
      */
-    public ArrayList<ExcelResponse>listHelper (){
+    public ArrayList<ExcelResponse>list (){
         ArrayList <ExcelResponse> excelResponses=new ArrayList<ExcelResponse>();
         List<ExcelFile> excelFiles=excelRepository.getFiles();
         if(excelFiles.isEmpty()){
@@ -104,7 +104,7 @@ public class ExcelServiceImpl implements ExcelService {
      *
      * Helper function to create an Excel file which has 1 sheet.
      */
-    public ExcelFile createHelper(ExcelRequest request) throws IOException {
+    public ExcelFile create(ExcelRequest request) throws IOException {
         ExcelFile excelFile=new ExcelFile();
         ExcelData excelData = new ExcelData();
         ExcelDataSheet sheet = new ExcelDataSheet();
@@ -156,7 +156,7 @@ public class ExcelServiceImpl implements ExcelService {
      *
      * Helper function to create an Excel file which multi-sheets
      */
-    public ExcelFile createMultiSheetHelper(MultiSheetExcelRequest request) throws IOException {
+    public ExcelFile createMultiSheet(MultiSheetExcelRequest request) throws IOException {
         ExcelFile excelFile =new ExcelFile();
         ExcelData excelData=new ExcelData();
         List<ExcelDataSheet> sheets = new ArrayList<ExcelDataSheet>();
